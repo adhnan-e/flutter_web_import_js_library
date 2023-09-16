@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:html' as html;
-
+//Updated 16/09/2023
 class ImportJsLibraryWeb {
   /// Injects the library by its [url]
   static Future<void> import(String url) {
@@ -12,7 +12,6 @@ class ImportJsLibraryWeb {
       ..type = "text/javascript"
       ..charset = "utf-8"
       ..async = true
-      //..defer = true
       ..src = library;
     return script;
   }
@@ -23,22 +22,22 @@ class ImportJsLibraryWeb {
     final List<Future<void>> loading = <Future<void>>[];
     final head = html.querySelector('head');
 
-    libraries.forEach((String library) {
+    for (String library in libraries) {
       if (!isImported(library)) {
         final scriptTag = _createScriptTag(library);
-        head.children.add(scriptTag);
+        head?.children.add(scriptTag);
         loading.add(scriptTag.onLoad.first);
       }
-    });
+    }
 
     return Future.wait(loading);
   }
 
-  static bool _isLoaded(html.Element head, String url) {
+  static bool _isLoaded(html.Element? head, String url) {
     if (url.startsWith("./")) {
       url = url.replaceFirst("./", "");
     }
-    for (var element in head.children) {
+    for (var element in head?.children ?? []) {
       if (element is html.ScriptElement) {
         if (element.src.endsWith(url)) {
           return true;
