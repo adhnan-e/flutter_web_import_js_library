@@ -5,8 +5,8 @@ author: Florent Champigny <champigny.florent@gmail.com>
 homepage: https://github.com/florent37/import_js_plugin
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.10.0"
+  sdk: '>=3.0.6 <4.0.0'
+  flutter: ">=3.13.4"
 
 dependencies:
   flutter:
